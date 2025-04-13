@@ -43,7 +43,12 @@
 
       document.getElementById("result-url").textContent = pixelURL;
       document.getElementById("result-code").textContent = embedCode;
-      document.getElementById("gmail-code").innerHTML = embedCode;
+      document.getElementById("gmail-code").document.getElementById("gmail-code").innerHTML = `
+  <div style="border: 1px dashed #ccc; padding: 8px; display: inline-block;">
+    <div style="font-size: 12px; color: gray; margin-bottom: 4px;">Right-click this box → “Copy Image Address”</div>
+    <img src='https://pixelcell.vercel.app/api/p/${id}' width='1' height='1' alt='pixel' />
+  </div>`;
+ = embedCode;
     }
 
     function copyCode() {
