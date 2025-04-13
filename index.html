@@ -2,124 +2,142 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🌱 Pixel Cell Generator</title>
   <style>
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: #f9f9fa;
-      color: #1d1d1f;
-      margin: 0;
-      padding: 40px;
+      background: #f4f6fa;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
-    }
-    h2 {
-      font-weight: 600;
-      margin-bottom: 24px;
-    }
-    label {
-      font-size: 14px;
-      margin-bottom: 6px;
-      display: block;
-    }
-    input {
-      padding: 10px;
-      font-size: 16px;
-      width: 300px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-    button {
-      background-color: #0071e3;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-size: 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-bottom: 24px;
-    }
-    button:hover {
-      background-color: #005bb5;
-    }
-    h3 {
-      margin-top: 30px;
-      font-weight: 500;
-    }
-    code {
-      background-color: #f0f0f5;
-      padding: 8px 12px;
-      display: block;
-      margin: 8px 0;
-      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
-      border-radius: 6px;
+      padding: 40px;
       color: #333;
     }
-    .gmail-box {
-      border: 1px dashed #ccc;
-      padding: 12px;
-      display: inline-block;
-      margin-top: 8px;
-      background-color: #fff;
+
+    h2 {
+      margin-bottom: 20px;
     }
-    .gmail-note {
-      font-size: 12px;
-      color: #555;
-      margin-bottom: 6px;
+
+    input, button {
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 12px;
+      outline: none;
+      margin: 5px;
+    }
+
+    input {
+      box-shadow: inset 8px 8px 20px #d1d9e6, inset -8px -8px 20px #fff;
+      background: #f4f6fa;
+    }
+
+    button {
+      background: #f4f6fa;
+      box-shadow: 6px 6px 12px #d1d9e6, -6px -6px 12px #fff;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+
+    button:hover {
+      box-shadow: 0 0 10px #00f0ff;
+      background: #eafcff;
+    }
+
+    code {
+      background: #ffffff;
+      padding: 8px 12px;
+      border-radius: 10px;
+      box-shadow: inset 2px 2px 5px #e0e0e0, inset -2px -2px 5px #ffffff;
+      display: block;
+      margin: 10px 0;
+      word-break: break-all;
+    }
+
+    .section {
+      max-width: 600px;
+      width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .invisible-img-container {
+      margin-top: 5px;
+      padding: 10px;
+      border: 1px dashed #00f0ff;
+      border-radius: 10px;
+      background: #f9fcff;
+    }
+
+    .invisible-img-container img {
+      width: 1px;
+      height: 1px;
+    }
+
+    .label {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
     }
   </style>
 </head>
 <body>
+
   <h2>🌱 Pixel Cell Generator</h2>
 
-  <label for="pixel-label">Pixel Label</label>
-  <input id="pixel-label" placeholder="e.g. Investor Email" />
-  <button onclick="generatePixel()">Generate Planted Pixel</button>
+  <div class="section">
+    <label for="pixel-label">Pixel Label</label><br>
+    <input id="pixel-label" placeholder="e.g. Investor Email" />
+    <button onclick="generatePixel()">Generate Planted Pixel</button>
+  </div>
 
-  <h3>🔗 Pixel URL</h3>
-  <code id="result-url"></code>
+  <div class="section">
+    <div class="label">🔗 Pixel URL</div>
+    <code id="result-url"></code>
+  </div>
 
-  <h3>📩 Standard Embed Code</h3>
-  <code id="result-code"></code>
-  <button onclick="copyCode()">Copy Embed</button>
+  <div class="section">
+    <div class="label">📩 Standard Embed Code</div>
+    <code id="result-code"></code>
+    <button onclick="copyCode()">Copy Embed</button>
+  </div>
 
-  <h3>✉️ Gmail-Compatible Embed</h3>
-  <code id="gmail-code"></code>
-  <button onclick="copyGmail()">Copy Gmail Embed</button>
+  <div class="section">
+    <div class="label">✉️ Gmail-Compatible Embed</div>
+    <code id="gmail-code"></code>
+    <div class="invisible-img-container">
+      <img id="gmail-pixel-img" src="" alt="pixel" />
+      <small>Right-click this box → Copy Image Address</small>
+    </div>
+    <button onclick="copyGmailEmbed()">Copy Gmail Embed</button>
+  </div>
 
   <script>
     function generatePixel() {
       const label = document.getElementById("pixel-label").value;
       const id = "px_" + Math.random().toString(36).substr(2, 8);
       const pixelURL = `/api/p/${id}`;
+      const fullPixelURL = `https://pixelcell.vercel.app${pixelURL}`;
       const embedCode = `<img src='${pixelURL}' width='1' height='1' style='display:none;' alt='' />`;
 
       document.getElementById("result-url").textContent = pixelURL;
       document.getElementById("result-code").textContent = embedCode;
 
-      document.getElementById("gmail-code").innerHTML = `
-        <div class="gmail-box">
-          <div class="gmail-note">Right-click this box → “Copy Image Address”</div>
-          <img src='https://pixelcell.vercel.app/api/p/${id}' width='1' height='1' alt='pixel' />
-        </div>`;
+      // Gmail embed
+      const gmailEmbedCode = `<img src="${fullPixelURL}" width="1" height="1" alt="pixel" />`;
+      document.getElementById("gmail-code").textContent = gmailEmbedCode;
+      document.getElementById("gmail-pixel-img").src = fullPixelURL;
     }
 
     function copyCode() {
       const code = document.getElementById("result-code").textContent;
       navigator.clipboard.writeText(code);
+      alert("Standard embed copied!");
     }
 
-    function copyGmail() {
-      const container = document.getElementById("gmail-code");
-      const temp = document.createElement("textarea");
-      temp.value = container.innerText;
-      document.body.appendChild(temp);
-      temp.select();
-      document.execCommand("copy");
-      document.body.removeChild(temp);
+    function copyGmailEmbed() {
+      const code = document.getElementById("gmail-code").textContent;
+      navigator.clipboard.writeText(code);
+      alert("Gmail embed copied!");
     }
   </script>
 </body>
