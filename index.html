@@ -5,6 +5,7 @@
 </head>
 <body>
   <h2>🌱 Pixel Cell Generator</h2>
+
   <label for="pixel-label">Pixel Label</label>
   <input id="pixel-label" placeholder="e.g. Investor Email" />
   <button onclick="generatePixel()">Generate Planted Pixel</button>
@@ -12,28 +13,9 @@
   <h3>🔗 Pixel URL</h3>
   <code id="result-url"></code>
 
-  <h3>📩 Embed Code</h3>
+  <h3>📩 Standard Embed Code</h3>
   <code id="result-code"></code>
-  <button onclick="copyCode()">Copy Embed Code</button>
+  <button onclick="copyCode()">Copy Embed</button>
 
-  <div id="pixel-preview" style="margin-top:10px;"></div>
-
-  <script>
-    const generatePixel = async () => {
-      const pixelId = 'px_' + Math.random().toString(36).substring(2, 10);
-      const pixelURL = `/api/p/${pixelId}`;
-      const embedCode = `<img src='${pixelURL}' width='1' height='1' style='display:none;' alt='' />`;
-      document.getElementById('result-url').textContent = pixelURL;
-      document.getElementById('result-code').textContent = embedCode;
-      document.getElementById('pixel-preview').innerHTML = embedCode;
-    };
-
-    const copyCode = () => {
-      const code = document.getElementById('result-code').textContent;
-      navigator.clipboard.writeText(code).then(() => {
-        alert('Embed code copied to clipboard!');
-      });
-    };
-  </script>
-</body>
-</html>
+  <h3>✉️ Gmail-Compatible Embed</h3>
+  <
