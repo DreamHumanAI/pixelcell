@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pixel View Dashboard</title>
+</head>
+<body>
+  <h2>📊 Pixel View Dashboard</h2>
+  <button onclick="loadDashboard()">Refresh Dashboard</button>
+  <table id="dashboard-table" border="1" style="width:100%;margin-top:10px;">
+    <tr><th>Pixel ID</th><th>Time</th><th>IP</th><th>User Agent</th></tr>
+  </table>
+  <script>
+    async function loadDashboard() {
+      const res = await fetch('/api/dashboard');
+      const rows = await res.json();
+      const table = document.getElementById('dashboard-table');
+      table.innerHTML = `<tr><th>Pixel ID</th><th>Time</th><th>IP</th><th>User Agent</th></tr>`;
+      rows.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${row.pixelId}</td><td>${row.timestamp}</td><td>${row.ip}</td><td>${row.userAgent}</td>`;
+        table.appendChild(tr);
+      });
+    }
+  </script>
+</body>
+</html>
