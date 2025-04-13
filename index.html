@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>🌱 Pixel Cell Generator</title>
   <style>
     body {
@@ -13,28 +13,9 @@
       padding: 40px;
       color: #333;
     }
-
-    .logo-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .logo-container img {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: #f4f6fa;
-      box-shadow: inset 6px 6px 12px #d1d9e6, inset -6px -6px 12px #ffffff;
-    }
-
     h2 {
       margin-bottom: 20px;
-      font-weight: 600;
-      font-size: 22px;
     }
-
     input, button {
       padding: 12px 20px;
       font-size: 16px;
@@ -43,24 +24,20 @@
       outline: none;
       margin: 5px;
     }
-
     input {
       box-shadow: inset 8px 8px 20px #d1d9e6, inset -8px -8px 20px #fff;
       background: #f4f6fa;
     }
-
     button {
       background: #f4f6fa;
       box-shadow: 6px 6px 12px #d1d9e6, -6px -6px 12px #fff;
       cursor: pointer;
       transition: all 0.2s ease-in-out;
     }
-
     button:hover {
       box-shadow: 0 0 10px #00f0ff;
       background: #eafcff;
     }
-
     code {
       background: #ffffff;
       padding: 8px 12px;
@@ -70,13 +47,11 @@
       margin: 10px 0;
       word-break: break-all;
     }
-
     .section {
       max-width: 600px;
       width: 100%;
       margin-bottom: 30px;
     }
-
     .invisible-img-container {
       margin-top: 5px;
       padding: 10px;
@@ -84,26 +59,30 @@
       border-radius: 10px;
       background: #f9fcff;
     }
-
     .invisible-img-container img {
       width: 1px;
       height: 1px;
     }
-
     .label {
       margin-top: 20px;
       font-weight: bold;
       font-size: 18px;
     }
+    .logo-container {
+      margin-bottom: 20px;
+    }
+    .logo-container img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
   </style>
 </head>
 <body>
-
-  <!-- Logo Header -->
-<div style="margin-bottom: 7px;">
-  <img src="logo.png" alt="Pixel Cell Logo" style="width: 80px; height: 80px; border-radius: 50%; box-shadow: 6px 6px 12px #d1d9e6, -6px -6px 12px #ffffff;">
-</div>
-
+  <!-- Logo -->
+  <div class="logo-container">
+    <img src="logo.png" alt="Pixel Cell Logo" />
+  </div>
 
   <h2>🌱 Pixel Cell Generator</h2>
 
@@ -136,31 +115,25 @@
 
   <script>
     function generatePixel() {
-      const label = document.getElementById("pixel-label").value;
       const id = "px_" + Math.random().toString(36).substr(2, 8);
       const pixelURL = `/api/p/${id}`;
-      const fullPixelURL = `https://pixelcell.vercel.app${pixelURL}`;
-      const embedCode = `<img src='${pixelURL}' width='1' height='1' style='display:none;' alt='' />`;
+      const gmailImg = `/pixels/${id}.png`;
+      const fullGmailURL = `https://pixelcell.vercel.app${gmailImg}`;
 
       document.getElementById("result-url").textContent = pixelURL;
-      document.getElementById("result-code").textContent = embedCode;
-
-      // Gmail embed
-      const gmailEmbedCode = `<img src="${fullPixelURL}" width="1" height="1" alt="pixel" />`;
-      document.getElementById("gmail-code").textContent = gmailEmbedCode;
-      document.getElementById("gmail-pixel-img").src = fullPixelURL;
+      document.getElementById("result-code").textContent = `<img src="${pixelURL}" width="1" height="1" style="display:none;" alt="" />`;
+      document.getElementById("gmail-code").textContent = `<img src="${fullGmailURL}" width="1" height="1" alt="pixel" />`;
+      document.getElementById("gmail-pixel-img").src = fullGmailURL;
     }
 
     function copyCode() {
-      const code = document.getElementById("result-code").textContent;
-      navigator.clipboard.writeText(code);
+      navigator.clipboard.writeText(document.getElementById("result-code").textContent);
       alert("Standard embed copied!");
     }
 
     function copyGmailEmbed() {
-      const code = document.getElementById("gmail-code").textContent;
-      navigator.clipboard.writeText(code);
-      alert("Gmail embed copied!");
+      navigator.clipboard.writeText(document.getElementById("gmail-code").textContent);
+      alert("Gmail-compatible embed copied!");
     }
   </script>
 </body>
