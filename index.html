@@ -2,19 +2,6 @@
 <html>
 <head>
   <title>🌱 Pixel Cell Generator</title>
-  <style>
-    code {
-      background-color: #f4f4f4;
-      padding: 4px 6px;
-      border-radius: 4px;
-      font-family: monospace;
-    }
-    button {
-      margin-top: 6px;
-      padding: 4px 10px;
-      cursor: pointer;
-    }
-  </style>
 </head>
 <body>
   <h2>🌱 Pixel Cell Generator</h2>
@@ -32,7 +19,7 @@
 
   <h3>✉️ Gmail-Compatible Embed</h3>
   <code id="gmail-code"></code>
-  <button onclick="copyGmailCode()">Copy Gmail Embed</button>
+  <button onclick="copyGmail()">Copy Gmail Embed</button>
 
   <script>
     function generatePixel() {
@@ -43,24 +30,30 @@
 
       document.getElementById("result-url").textContent = pixelURL;
       document.getElementById("result-code").textContent = embedCode;
-      document.getElementById("gmail-code").document.getElementById("gmail-code").innerHTML = `
-  <div style="border: 1px dashed #ccc; padding: 8px; display: inline-block;">
-    <div style="font-size: 12px; color: gray; margin-bottom: 4px;">Right-click this box → “Copy Image Address”</div>
-    <img src='https://pixelcell.vercel.app/api/p/${id}' width='1' height='1' alt='pixel' />
-  </div>`;
- = embedCode;
+
+      // ✅ Gmail-compatible embed wrapped in visible container
+      document.getElementById("gmail-code").innerHTML = `
+        <div style="border: 1px dashed #ccc; padding: 8px; display: inline-block;">
+          <div style="font-size: 12px; color: gray; margin-bottom: 4px;">
+            Right-click this box → “Copy Image Address”
+          </div>
+          <img src='https://pixelcell.vercel.app/api/p/${id}' width='1' height='1' alt='pixel' />
+        </div>`;
     }
 
     function copyCode() {
       const code = document.getElementById("result-code").textContent;
       navigator.clipboard.writeText(code);
-      alert("📋 Standard embed copied!");
     }
 
-    function copyGmailCode() {
-      const gmailEmbed = document.getElementById("gmail-code").textContent;
-      navigator.clipboard.writeText(gmailEmbed);
-      alert("📋 Gmail embed copied!");
+    function copyGmail() {
+      const container = document.getElementById("gmail-code");
+      const temp = document.createElement("textarea");
+      temp.value = container.innerText;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand("copy");
+      document.body.removeChild(temp);
     }
   </script>
 </body>
