@@ -4,11 +4,38 @@
   <title>🌱 Pixel Cell Generator</title>
 </head>
 <body>
+<script>
+  function generatePixel() {
+    const label = document.getElementById("pixel-label").value;
+    const id = "px_" + Math.random().toString(36).substr(2, 8);
+    const pixelURL = `/api/p/${id}`;
+    const embedCode = `<img src='${pixelURL}' width='1' height='1' style='display:none;' alt='' />`;
+
+    // Update pixel URL + standard embed
+    document.getElementById("result-url").textContent = pixelURL;
+    document.getElementById("result-code").textContent = embedCode;
+
+    // ✅ Gmail-compatible embed
+    document.getElementById("gmail-code").innerHTML = `<img src='https://pixelcell.vercel.app/api/p/${id}' width='1' height='1' alt='pixel' />`;
+  }
+
+  function copyCode() {
+    const code = document.getElementById("result-code").textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      alert("Embed code copied!");
+    });
+  }
+</script>
+</body>
+</html>
+
+  
   <h2>🌱 Pixel Cell Generator</h2>
 
   <label for="pixel-label">Pixel Label</label>
   <input id="pixel-label" placeholder="e.g. Investor Email" />
   <button onclick="generatePixel()">Generate Planted Pixel</button>
+
 
   <h3>🔗 Pixel URL</h3>
   <code id="result-url"></code>
@@ -19,5 +46,5 @@
 
   <h3>✉️ Gmail-Compatible Embed</h3>
   <code id="gmail-code"></code>
-  document.getElementById("gmail-code").innerHTML = `<img src='https://pixelcell.vercel.app/api/p/${id}' width='1' height='1' alt='pixel' />`;
+ 
 
