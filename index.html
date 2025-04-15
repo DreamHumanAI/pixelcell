@@ -138,3 +138,64 @@
   </script>
 </body>
 </html>
+
+<hr style="margin: 60px 0; border: none; border-top: 1px solid #ccc; width: 80%;" />
+
+<h2>📦 Pixel Upload Helper (Gmail-Compatible)</h2>
+
+<div class="section">
+  <label for="upload-label">Pixel File Name</label><br>
+  <input id="upload-label" placeholder="e.g. investor_launch" />
+  <button onclick="generatePNG()">Download Transparent Pixel</button>
+</div>
+
+<div class="section" id="download-section" style="display:none;">
+  <div class="label">🖼️ File Download</div>
+  <a id="download-link" download="" style="font-size: 16px; text-decoration: underline; color: #0077cc;">Click to download</a>
+
+  <div class="label">✉️ Gmail Embed Code</div>
+  <code id="gmail-embed-snippet"></code>
+
+  <div class="label">📥 Upload Instructions</div>
+  <ul style="text-align: left;">
+    <li>1. Go to your GitHub repo → Click “Add file” → “Upload files”</li>
+    <li>2. Upload the PNG you just downloaded</li>
+    <li>3. Commit changes → Redeploy on Vercel</li>
+    <li>4. Use: <code>https://pixelcell.vercel.app/[filename].png</code> in Gmail</li>
+  </ul>
+</div>
+
+<script>
+  function generatePNG() {
+    const label = document.getElementById("upload-label").value.trim().toLowerCase().replace(/\s+/g, "_");
+    const fileName = `px_${label || "untitled"}.png`;
+
+    // Generate base64 1x1 transparent PNG
+    const base64 =
+      "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQI12P4//8/AwAI/AL+LC2L4wAAAABJRU5ErkJggg==";
+    const blob = b64toBlob(base64, "image/png");
+
+    const link = document.getElementById("download-link");
+    link.href = URL.createObjectURL(blob);
+    link.download = fileName;
+
+    document.getElementById("download-section").style.display = "block";
+    document.getElementById("gmail-embed-snippet").textContent =
+      `<img src="https://pixelcell.vercel.app/${fileName}" width="1" height="1" alt="pixel" />`;
+  }
+
+  function b64toBlob(b64Data, contentType = "", sliceSize = 512) {
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) byteNumbers[i] = slice.charCodeAt(i);
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+
+    return new Blob(byteArrays, { type: contentType });
+  }
+</script>
