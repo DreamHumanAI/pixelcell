@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🌱 Pixel Cell Generator</title>
   <style>
     body {
@@ -135,6 +135,39 @@
     function copyGmailEmbed() {
       navigator.clipboard.writeText(document.getElementById("gmail-code").textContent);
       alert("Gmail-compatible embed copied!");
+      @media (max-width: 600px) {
+  body {
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  input, button {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+    margin: 8px 0;
+  }
+
+  .logo-container img,
+  div[style*="logo.png"] img {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .section {
+    padding: 0 5px;
+  }
+
+  code {
+    font-size: 14px;
+    word-wrap: break-word;
+  }
+}
+
     }
   </script>
 </body>
