@@ -96,6 +96,13 @@
 }
 
 button {
+  button {
+  /* ...existing styles... */
+  -webkit-user-select: none;  /* Prevent iOS selection popup */
+  user-select: none;
+  -webkit-touch-callout: none; /* Prevent long-press tooltips */
+}
+
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -124,6 +131,12 @@ button:active::after {
 }
 
       @media (max-width: 600px) {
+         button {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+}
   body {
     padding: 20px;
   }
