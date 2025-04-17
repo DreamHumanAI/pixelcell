@@ -175,6 +175,17 @@
 
     }
   </script>
+  <script>
+  // 🌱 Vibration on button tap
+  document.querySelectorAll("button").forEach(button => {
+    button.addEventListener("click", () => {
+      if (navigator.vibrate) {
+        navigator.vibrate(25); // Gentle 25ms vibration
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
 
