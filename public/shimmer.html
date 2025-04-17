@@ -5,21 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>✨ Shimmer Logo</title>
 
-  <!-- Load external CSS + JS -->
+  <!-- External styles and script -->
   <link rel="stylesheet" href="shimmer.css">
   <script src="shimmer.js" defer></script>
-</head>
-
-<body>
-<div class="page"> 
-  <div class="logo-container">
-    <div class="orbit-ring"></div> <!-- ✅ Moved inside -->
-    <div class="logo">
-      <img src="logo.png"
-           alt="Logo"
-           class="logo-img" />
-      <div class="shimmer-beam"></div>
-    </div>
 </head>
 
 <body>
@@ -27,24 +15,10 @@
     <div class="logo-container">
       <div class="orbit-ring"></div>
       <div class="logo">
-        <img src="logo.png"
-             alt="Logo"
-             class="logo-img" />
+        <img src="logo.png" alt="Logo" class="logo-img" />
         <div class="shimmer-beam"></div>
       </div>
     </div>
   </div>
 </body>
 </html>
-
-
-<script>
-  const shimmerSound = new Audio('https://media1.vocaroo.com/mp3/16FVkPyKDYG8');
-  document.addEventListener('click', () => {
-    shimmerSound.volume = 0.5;
-    shimmerSound.play();
-    setInterval(() => shimmerSound.play(), 30000);
-  }, { once: true });
-</script>
-
-
